@@ -13,3 +13,8 @@ jobs:
           node-version: '18.x'
       - run: npm install
       - run: npm run build 
+  call-workflow-passing-data:
+    uses: Sri1503/learn-githubactions/.github/workflows/reusable-workflow.yml@main
+    with:
+      config-path: .github/labeler.yml
+    secrets: inherit
