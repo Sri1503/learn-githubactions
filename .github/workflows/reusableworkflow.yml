@@ -1,3 +1,5 @@
+name: Reusable workflow example
+
 on:
   workflow_call:
     inputs:
@@ -7,3 +9,16 @@ on:
     secrets:
       personal_access_token:
         required: true
+jobs:
+  reusable_workflow_job:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/labeler@v5
+      with:
+        repo-token: ${{ secrets.personal_access_token }}
+        configuration-path: ${{ inputs.config-path }}
+  call-workflow-passing-data:
+    uses: Sri1503/learn-githubactions/.github/workflows/reusable-workflow.yml@main
+    with:
+      config-path: .github/labeler.yml
+    secrets: inherit
